@@ -28,7 +28,7 @@ struct ContentView: View {
                             RoundedRectangle(cornerRadius: 20).frame(width: 140, height: 65).foregroundColor(.blue)
                             Text("Search").foregroundColor(.white)
                         }.padding()
-                    }.sheet(isPresented: $isPresentingScene) {
+                    }.fullScreenCover(isPresented: $isPresentingScene) {
                         LegendView(listOfLegend: $legendChoose, insertTag: $Desc, suggestedTag: $Tag)
                     }
                     Button {
@@ -58,12 +58,13 @@ struct ContentView: View {
     
     func filterByLegendTag(legends: FetchedResults<MetropolitanLegends>, inserTag: String) -> [MetropolitanLegends]{
         var tmp: [MetropolitanLegends] = Array()
-        for legend in legends {
-            let tmpTag = legend.legendTag!.components(separatedBy: ",")
-            for tag in tmpTag {
-                if(tag.compare(inserTag, options: .caseInsensitive) == .orderedSame && !(legend.legendIsRead)){
-                    tmp.append(legend)
-        
+        if(inserTag.compare("", options: .caseInsensitive) != .orderedSame){
+            for legend in legends {
+                let tmpTag = legend.legendTag!.components(separatedBy: ",")
+                for tag in tmpTag {
+                    if(tag.compare(inserTag, options: .caseInsensitive) == .orderedSame && !(legend.legendIsRead)){
+                        tmp.append(legend)
+                    }
                 }
             }
         }

@@ -19,5 +19,6 @@ class MetropolitanLegends: NSManagedObject, Identifiable{
     @NSManaged var legenDescription: String?
     @NSManaged var legendTag: String?
     @NSManaged var legendIsRead: Bool
+    @NSManaged var legendImage: String
     
 }

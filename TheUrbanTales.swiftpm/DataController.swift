@@ -48,6 +48,11 @@ class DataController: ObservableObject{
         legendIsReadAttribute.name = "legendIsRead"
         legendIsReadAttribute.type = .boolean
         metropolitanLegendsEntity.properties.append(legendIsReadAttribute)
+        
+        let legendImageAttribute = NSAttributeDescription()
+        legendImageAttribute.name = "legendImage"
+        legendImageAttribute.type = .string
+        metropolitanLegendsEntity.properties.append(legendImageAttribute)
 
         let model = NSManagedObjectModel()
         model.entities = [metropolitanLegendsEntity]
@@ -80,7 +85,7 @@ class DataController: ObservableObject{
         
     }
     
-    func addLegend(aName: String, aLocation: String, aLegenDescription: String, aTag: String, aContext: NSManagedObjectContext) {
+    func addLegend(aName: String, aLocation: String, aLegenDescription: String, aTag: String, aImage: String, aContext: NSManagedObjectContext) {
         let legend = MetropolitanLegends(context: aContext)
         legend.legendIndex = UUID()
         legend.legendName = aName
@@ -88,6 +93,7 @@ class DataController: ObservableObject{
         legend.legenDescription = aLegenDescription
         legend.legendTag = aTag
         legend.legendIsRead = false
+        legend.legendImage = aImage
         save(context: aContext)
     }
     
